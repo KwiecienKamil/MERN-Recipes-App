@@ -1,6 +1,6 @@
 import {Route, Routes} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
-import NavigationBar from "./components/NavigationBar"
+import NavigationBar from "./components/NavigationBar/NavigationBar"
 import Home from "./pages/Home"
 import Auth from "./pages/Auth"
 import CreateRecipe from "./pages/CreateRecipe"
@@ -12,7 +12,6 @@ function App() {
   return (
     <>
     <BrowserRouter>
-    <h1>XDD</h1>
      <NavigationBar />
      <Routes>
       <Route path="/" element={<Home />} />

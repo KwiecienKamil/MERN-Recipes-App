@@ -12,7 +12,6 @@ app.use(cors());
 
 app.use("/auth", userRouter)
 
-const password = process.env.VITE_PASSWORD
 
 mongoose.connect(`mongodb+srv://kamciu:${process.env.VITE_PASSWORD}@recipes.zuk04li.mongodb.net/recipes?retryWrites=true&w=majority`)
 

@@ -3,23 +3,31 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 const Register = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate()
+
   const handleRegister = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try{
-      await axios.post("http://localhost:3001/auth/register", {
-        username, password
-      });
-      navigate("/login")
-    } catch(err) {
-      console.log(err);
-    }
-    setUsername("");
-    setPassword("");
+    if(username.length >= 3 && password.length >= 4) {
+      try{
+        await axios.post("http://localhost:3001/auth/register", {
+          username, password
+        });
+        navigate("/login")
+      } catch(err) {
+        console.log(err);
+      }
+      setUsername("");
+      setPassword("");
+     }else {
+      toast("Minimum 3 characters in username and 4 characters in password!")
+     }
+  
   }
   return (
     <div className="wrapper">
@@ -34,7 +42,6 @@ const Register = () => {
               type="username"
               placeholder="Enter Username"
             />
-            
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>

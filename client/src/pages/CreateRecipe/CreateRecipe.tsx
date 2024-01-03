@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useGetUserID } from "../../hooks/useGetUserID";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 type recipeType = {
   name: string;
@@ -17,6 +18,7 @@ type recipeType = {
 
 
 const CreateRecipe = () => {
+  const [cookies,_] = useCookies(["access_token"])
   const navigate = useNavigate()
   const userID = useGetUserID()
   const [recipe, setRecipe] = useState<recipeType>({
@@ -39,24 +41,21 @@ const CreateRecipe = () => {
     ingredients[index] = value
     setRecipe({ ...recipe, ingredients});
   };
-
   const addIngredient = () => {
     setRecipe({ ...recipe, ingredients: [...recipe.ingredients, ""] });
   };
-  
-  
   const onSumbit = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
      try{
-      await axios.post("http://localhost:3001/recipes", recipe)
+      await axios.post("http://localhost:3001/recipes", recipe, {
+         headers: {authorization: cookies.access_token}
+      })
       alert("Recipe Created")
      } catch(err){
       console.log(err);
      }
      navigate("/")
   }
-  
-  
   return (
     <div className="createWrapper">
       <div className="h-100 w-100 d-flex align-items-center justify-content-center fs-4">
@@ -117,8 +116,8 @@ const CreateRecipe = () => {
               onChange={handleChange}
             />
           </Form.Group>
-          <Button variant="success" type="submit" className="w-100">
-            Submit
+          <Button variant="success" disabled={!userID} type="submit" className="w-100">
+            {!userID ? "Login first" : "Create"}
           </Button>
         </Form>
       </div>

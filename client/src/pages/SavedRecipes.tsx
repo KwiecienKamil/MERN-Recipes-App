@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useGetUserID } from "../hooks/useGetUserID";
 import axios from "axios";
 
-const SavedRecipes = ({ savedRecipes }) => {
-  const [recipes, setRecipes] = useState([]);
+const SavedRecipes = () => {
+  const [recipes, setRecipes] = useState<any[]>([]);
 
   const userID = useGetUserID();
   useEffect(() => {
@@ -24,9 +23,9 @@ const SavedRecipes = ({ savedRecipes }) => {
   }, [])
 
   return (
-    <div className="wrapper">
+    <div className="homewrapper">
       <div className="homediv">
-        {recipes.map((recipe) => (
+      {recipes?.map((recipe) => (
        <Card key={recipe._id} style={{ maxWidth: '375px'}}>
        <Card.Img variant="top" src={recipe.imageUrl} />
        <Card.Body>
@@ -35,7 +34,7 @@ const SavedRecipes = ({ savedRecipes }) => {
           <h2 className="fs-4">{`${recipe.cookingTime}min`}</h2>
          </div>
           <ul>
-          {recipe.ingredients.map((item) => (
+          {recipe.ingredients.map((item:string) => (
             <li key={Math.floor(Math.random() * 999)}>{item}</li>
             ))}
           </ul>

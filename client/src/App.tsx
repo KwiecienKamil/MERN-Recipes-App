@@ -1,7 +1,6 @@
 import {Route, Routes} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import NavigationBar from "./components/NavigationBar/NavigationBar"
-import Auth from "./pages/Auth"
 import SavedRecipes from "./pages/SavedRecipes"
 import { BrowserRouter } from "react-router-dom"
 import Login from "./pages/Login/Login"
@@ -34,9 +33,8 @@ function App() {
      <NavigationBar />
      <Routes>
       <Route path="/" element={<Home savedRecipes={savedRecipes}/>} />
-      <Route path="/auth" element={<Auth />} />
       <Route path="/createrecipe" element={<CreateRecipe />} />
-      <Route path="/savedRecipes" element={<SavedRecipes savedRecipes={savedRecipes}/>} />
+      <Route path="/savedRecipes" element={<SavedRecipes />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
      </Routes>

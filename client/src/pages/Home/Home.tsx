@@ -3,15 +3,17 @@ import { FC, useEffect, useState } from "react"
 import  Button  from "react-bootstrap/Button";
 import  Card from "react-bootstrap/Card";
 import { useGetUserID } from "../../hooks/useGetUserID";
+import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
 
 type HomeProps = {
   savedRecipes: string[]
 }
 
 const Home: FC<HomeProps> = ({savedRecipes}) => {
-  const [recipes, setRecipes] = useState([])
+  const [recipes, setRecipes] = useState<any[]>([])
   const [addRecipe, setAddRecipe] = useState([])
-
+  const [cookies,_] = useCookies(["access_token"])
   const userID = useGetUserID()
   
 
@@ -20,8 +22,6 @@ const Home: FC<HomeProps> = ({savedRecipes}) => {
       try{
        const response =  await axios.get("http://localhost:3001/recipes");
        setRecipes(response.data);
-       console.log(response.data);
-          
        } catch(err){
         console.log(err);
        }
@@ -29,24 +29,29 @@ const Home: FC<HomeProps> = ({savedRecipes}) => {
     fetchRecipe()
   },[]);
 
-  const saveRecipe = async (recipeID) => {
+  const saveRecipe = async (recipeID:string) => {
+   if (!userID) {
+    toast("Login first")
+   }else {
     try {
       const response = await axios.put("http://localhost:3001/recipes", {
         recipeID, userID
-      })
+      }, {headers: {authorization: cookies.access_token}})
       setAddRecipe(response.data.savedRecipes)
     }catch(err) {
       console.log(err);
     }
     window.location.reload()
+    toast("Recipe saved")
+   }
   }
 
-  const isRecipeSaved = (id) =>  savedRecipes.includes(id)
+  const isRecipeSaved = (id:string) =>  savedRecipes?.includes(id)
   return (
-    <div className="wrapper">
+    <div className="homewrapper">
       <div className="homediv">
-      {recipes.map((recipe) => (
-         <Card key={recipe._id} style={{ maxWidth: '375px'}} className="background">
+      {recipes?.map((recipe) => (
+         <Card key={recipe._id} style={{ maxWidth: '375px'}} className="background shadow-lg">
          <Card.Img variant="top" src={recipe.imageUrl} />
          <Card.Body>
            <div className="d-flex gap-1 align-items-center justify-content-between pb-4 px-2">
@@ -54,7 +59,7 @@ const Home: FC<HomeProps> = ({savedRecipes}) => {
             <h2 className="fs-4">{`${recipe.cookingTime}min`}</h2>
            </div>
             <ul>
-            {recipe.ingredients.map((item) => (
+            {recipe.ingredients.map((item:string) => (
               <li key={Math.floor(Math.random() * 999)}>{item}</li>
               ))}
             </ul>

@@ -27,6 +27,7 @@ const Login = () => {
     }
     setUsername("");
     setPassword("");
+    window.location.reload()
   }
 
   return (

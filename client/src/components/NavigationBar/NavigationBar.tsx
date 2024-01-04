@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { PiCookingPotFill } from "react-icons/pi";
 import "../../index.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import  Button from "react-bootstrap/Button";
 import { useGetUserID } from "../../hooks/useGetUserID";
@@ -12,13 +12,11 @@ import { useGetUserID } from "../../hooks/useGetUserID";
 const NavigationBar = () => {
   const [cookies, setCookies] = useCookies(["access_token"])
 
-  const navigate = useNavigate()
   const userID = useGetUserID()
 
   const logout = () => {
     setCookies("access_token", "");
     window.localStorage.removeItem("userID")
-    navigate("/");
     window.location.reload()
   }
   return (

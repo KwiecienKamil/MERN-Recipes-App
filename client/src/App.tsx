@@ -1,8 +1,7 @@
-import {Route, Routes} from "react-router-dom"
+import { Route, Routes} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import NavigationBar from "./components/NavigationBar/NavigationBar"
 import SavedRecipes from "./pages/SavedRecipes"
-import { BrowserRouter } from "react-router-dom"
 import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 import CreateRecipe from "./pages/CreateRecipe/CreateRecipe"
@@ -29,16 +28,14 @@ function App() {
   }, []);
   return (
     <>
-    <BrowserRouter>
-     <NavigationBar />
      <Routes>
+     <NavigationBar />
       <Route path="/" element={<Home savedRecipes={savedRecipes}/>} />
       <Route path="/createrecipe" element={<CreateRecipe />} />
       <Route path="/savedRecipes" element={<SavedRecipes />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
      </Routes>
-     </BrowserRouter>
     </>
   )
 }

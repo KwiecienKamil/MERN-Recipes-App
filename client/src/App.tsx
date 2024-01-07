@@ -28,8 +28,8 @@ function App() {
   }, []);
   return (
     <>
-     <Routes>
      <NavigationBar />
+     <Routes>
       <Route path="/" element={<Home savedRecipes={savedRecipes}/>} />
       <Route path="/createrecipe" element={<CreateRecipe />} />
       <Route path="/savedRecipes" element={<SavedRecipes />} />

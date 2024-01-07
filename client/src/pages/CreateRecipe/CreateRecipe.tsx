@@ -58,8 +58,9 @@ const CreateRecipe = () => {
   }
   return (
     <div className="createWrapper">
+      <div className="createDiv">
       <div className="h-100 w-100 d-flex align-items-center justify-content-center fs-4">
-        <Form className="form bg-dark p-4 text-light rounded" onSubmit={onSumbit}>
+        <Form className="mt-5 form bg-dark p-4 text-light rounded" onSubmit={onSumbit}>
           <h1 className="w-100 text-center fs-1 py-2 rounded">Create Recipe</h1>
           <Form.Group className="mb-1">
             <Form.Label htmlFor="name">
@@ -121,6 +122,7 @@ const CreateRecipe = () => {
           </Button>
         </Form>
       </div>
+    </div>
     </div>
   );
 };

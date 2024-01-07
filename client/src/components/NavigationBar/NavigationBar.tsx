@@ -20,7 +20,7 @@ const NavigationBar = () => {
     window.location.reload()
   }
   return (
-    <Navbar fixed="top" expand="lg" bg="dark" data-bs-theme="dark" className="appfont">
+    <Navbar fixed="top" expand="lg" bg="dark" data-bs-theme="dark" className="appfont px-2">
       <Container>
         <Navbar.Brand href="/" className="fs-4 text-success fw-bold bg-light rounded-pill px-2" >
           <PiCookingPotFill className="fs-3 mb-1" />

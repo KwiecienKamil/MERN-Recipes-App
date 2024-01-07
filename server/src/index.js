@@ -17,4 +17,4 @@ app.use("/recipes", recipesRouter)
 
 mongoose.connect(`mongodb+srv://kamciu:${process.env.VITE_PASSWORD}@recipes.zuk04li.mongodb.net/recipes?retryWrites=true&w=majority`)
 
-app.listen(3001, () => console.log("Server started"));
+app.listen(process.env.PORT || 3001, () => console.log("Server started"));

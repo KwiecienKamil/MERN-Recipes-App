@@ -10,7 +10,7 @@ describe('Test suits for MyComponentWithLink', () => {
           <NavigationBar/>
         </BrowserRouter>
       );
-      const aElemnt = screen.getByText("Home")
-     expect(aElemnt).toBeInTheDocument();
+      const btn = screen.getByText('Login');
+     expect(btn).toBeInTheDocument();
      });
     });

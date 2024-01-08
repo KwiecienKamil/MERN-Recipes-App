@@ -1,7 +1,7 @@
 
 **`MERN Recipes Website`**
 
-Login/Register with jwt token connected to MongoDB authorization
+Login/Register with jwt token connected to MongoDB authorization, creating recipes, saving recipes only when you are logged in, saved recipes are assigned to the user
 
 **`Created Using`**
 
